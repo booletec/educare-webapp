@@ -1,110 +1,170 @@
-import {
-  CCard,
-  CCardBody,
-  CCardFooter,
-  CCardHeader,
-  CCardTitle,
-  CPagination,
-  CPaginationItem,
-  CTable,
-  CAvatar,
-} from '@coreui/react'
 import React from 'react'
+import Grid from 'src/components/grid/Grid'
+import {
+  cibCcAmex,
+  cibCcApplePay,
+  cibCcMastercard,
+  cibCcPaypal,
+  cibCcStripe,
+  cibCcVisa,
+  cifBr,
+  cifEs,
+  cifFr,
+  cifIn,
+  cifPl,
+  cifUs,
+} from '@coreui/icons'
+import { CAvatar, CTableRow, CTableDataCell, CProgress } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 
-import a from '../../../assets/images/avatars/1.jpg'
+import avatar1 from 'src/assets/images/avatars/1.jpg'
+import avatar2 from 'src/assets/images/avatars/2.jpg'
+import avatar3 from 'src/assets/images/avatars/3.jpg'
+import avatar4 from 'src/assets/images/avatars/4.jpg'
+import avatar5 from 'src/assets/images/avatars/5.jpg'
+import avatar6 from 'src/assets/images/avatars/6.jpg'
 
 const Persons = () => {
-  const columns = [
-    {
-      key: '_foto',
-      label: 'Foto',
-      _props: { scope: 'col' },
-    },
-    {
-      key: '_nome',
-      label: 'Nome completo',
-      _props: { scope: 'col' },
-    },
-    {
-      key: '_dataNascimento',
-      label: 'Nascido em',
-      _props: { scope: 'col' },
-    },
-    {
-      key: '_funcao',
-      label: 'Função',
-      _props: { scope: 'col' },
-    },
-    {
-      key: '_endereco',
-      label: 'Endereco',
-      _props: { scope: 'col' },
-    },
-    {
-      key: '_contatos',
-      label: 'Contatos',
-      _props: { scope: 'col' },
-    },
-  ]
-  const items = [
-    {
-      id: 1,
-      _foto: (
-        <td>
-          <CAvatar
-            src={
-              'https://criticalhits.com.br/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2022/12/a402f-16694231050443-1920-910x512.jpg.webp'
-            }
-          />
-        </td>
-      ),
-      _nome: 'Mark',
-      _dataNascimento: '07/09/1981',
-      _funcao: 'professora',
-      _endereco: 'rua fake de vasconcelos, 127, Bairro, Cidade, Estado',
-      _contatos: '(22) 992433057',
-      _cellProps: { id: { scope: 'row' } },
-    },
-    {
-      id: 2,
-      _foto: '2.jpg',
-      _nome: 'Reanto',
-      _dataNascimento: '07/09/1991',
-      _funcao: 'Auxiliar',
-      _endereco: 'rua fake de janerio, 127, Bairro, Cidade, Estado',
-      _contatos: '(22) 992433123',
-      _cellProps: { id: { scope: 'row' } },
-    },
-    {
-      id: 3,
-      _foto: '3.jpg',
-      _nome: 'Renan',
-      _dataNascimento: '07/09/1998',
-      _funcao: 'Auxiliar',
-      _endereco: 'rua fake de janerio, 127, Bairro, Cidade, Estado',
-      _contatos: '(22) 9924331234',
-      _cellProps: { id: { scope: 'row' } },
-    },
-  ]
+  const options = {
+    collumns: [
+      { key: 'user', label: 'Perfil', icon: cifUs, class: 'text-center' },
+      { key: 'info', label: 'Info' },
+      { key: 'flag', label: 'Nacionalidade' },
+      { key: 'usage', label: 'Utilização' },
+      { key: 'paymentMethod', label: 'Método de pagamento' },
+      { key: 'activity', label: 'Atividade' },
+    ],
+    search: { enabled: true, filterBy: ['user'] },
+  }
 
+  const data = [
+    {
+      avatar: { src: avatar1, status: 'success' },
+      user: {
+        name: 'Yiorgos Avraamu',
+        new: true,
+        registered: 'Jan 1, 2021',
+      },
+      country: { name: 'USA', flag: cifUs },
+      usage: {
+        value: 50,
+        period: 'Jun 11, 2021 - Jul 10, 2021',
+        color: 'success',
+      },
+      payment: { name: 'Mastercard', icon: cibCcMastercard },
+      activity: '10 sec ago',
+    },
+    {
+      avatar: { src: avatar2, status: 'danger' },
+      user: {
+        name: 'Avram Tarasios',
+        new: false,
+        registered: 'Jan 1, 2021',
+      },
+      country: { name: 'Brazil', flag: cifBr },
+      usage: {
+        value: 22,
+        period: 'Jun 11, 2021 - Jul 10, 2021',
+        color: 'info',
+      },
+      payment: { name: 'Visa', icon: cibCcVisa },
+      activity: '5 minutes ago',
+    },
+    {
+      avatar: { src: avatar3, status: 'warning' },
+      user: { name: 'Quintin Ed', new: true, registered: 'Jan 1, 2021' },
+      country: { name: 'India', flag: cifIn },
+      usage: {
+        value: 74,
+        period: 'Jun 11, 2021 - Jul 10, 2021',
+        color: 'warning',
+      },
+      payment: { name: 'Stripe', icon: cibCcStripe },
+      activity: '1 hour ago',
+    },
+    {
+      avatar: { src: avatar4, status: 'secondary' },
+      user: { name: 'Enéas Kwadwo', new: true, registered: 'Jan 1, 2021' },
+      country: { name: 'France', flag: cifFr },
+      usage: {
+        value: 98,
+        period: 'Jun 11, 2021 - Jul 10, 2021',
+        color: 'danger',
+      },
+      payment: { name: 'PayPal', icon: cibCcPaypal },
+      activity: 'Last month',
+    },
+    {
+      avatar: { src: avatar5, status: 'success' },
+      user: {
+        name: 'Agapetus Tadeáš',
+        new: true,
+        registered: 'Jan 1, 2021',
+      },
+      country: { name: 'Spain', flag: cifEs },
+      usage: {
+        value: 22,
+        period: 'Jun 11, 2021 - Jul 10, 2021',
+        color: 'primary',
+      },
+      payment: { name: 'Google Wallet', icon: cibCcApplePay },
+      activity: 'Last week',
+    },
+    {
+      avatar: { src: avatar6, status: 'danger' },
+      user: {
+        name: 'Friderik Dávid',
+        new: true,
+        registered: 'Jan 1, 2021',
+      },
+      country: { name: 'Poland', flag: cifPl },
+      usage: {
+        value: 43,
+        period: 'Jun 11, 2021 - Jul 10, 2021',
+        color: 'success',
+      },
+      payment: { name: 'Amex', icon: cibCcAmex },
+      activity: 'Last week',
+    },
+  ]
   return (
-    <CCard>
-      <CCardHeader>
-        <CCardTitle>Gestão de pessoas</CCardTitle>
-      </CCardHeader>
-      <CCardBody>
-        <CTable striped columns={columns} items={items} />
-      </CCardBody>
-      <CCardFooter>
-        <CPagination align="end">
-          <CPaginationItem disabled>Anterior</CPaginationItem>
-          <CPaginationItem active>1</CPaginationItem>
-          <CPaginationItem>2</CPaginationItem>
-          <CPaginationItem>3</CPaginationItem>
-          <CPaginationItem>Próximo</CPaginationItem>
-        </CPagination>
-      </CCardFooter>
-    </CCard>
+    <Grid collumns={options.collumns} search={options.search} data={data}>
+      {data.map((item, index) => (
+        <CTableRow v-for="item in tableItems" key={index}>
+          <CTableDataCell className="text-center">
+            <CAvatar size="md" src={item.avatar.src} status={item.avatar.status} />
+          </CTableDataCell>
+          <CTableDataCell>
+            <div>{item.user.name}</div>
+            <div className="small text-medium-emphasis">
+              <span>{item.user.new ? 'New' : 'Recurring'}</span> | Registered:{' '}
+              {item.user.registered}
+            </div>
+          </CTableDataCell>
+          <CTableDataCell className="text-center">
+            <CIcon size="xl" icon={item.country.flag} title={item.country.name} />
+          </CTableDataCell>
+          <CTableDataCell>
+            <div className="clearfix">
+              <div className="float-start">
+                <strong>{item.usage.value}%</strong>
+              </div>
+              <div className="float-end">
+                <small className="text-medium-emphasis">{item.usage.period}</small>
+              </div>
+            </div>
+            <CProgress thin color={item.usage.color} value={item.usage.value} />
+          </CTableDataCell>
+          <CTableDataCell className="text-center">
+            <CIcon size="xl" icon={item.payment.icon} />
+          </CTableDataCell>
+          <CTableDataCell>
+            <div className="small text-medium-emphasis">Last login</div>
+            <strong>{item.activity}</strong>
+          </CTableDataCell>
+        </CTableRow>
+      ))}
+    </Grid>
   )
 }
 
